@@ -28,6 +28,6 @@
                 "description": "The version number of WeChat"
             }
         },
-        "required": ["updated", "size", "md5", "version"]
+        "required": ["released", "size", "md5", "version"]
     }
 }
