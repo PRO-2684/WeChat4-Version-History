@@ -2,7 +2,7 @@
 
 [English](README.md) | 简体中文
 
-[![GitHub Workflow Status](https://img.shields.io/github/workflow/status/PRO-2684/wechat4-version-history/Update%20Versions?label=Update%20Versions&logo=github)](
+![GitHub Release](https://img.shields.io/github/v/release/PRO-2684/WeChat4-Version-History?logo=wechat&color=%2307c160)
 
 此仓库自动跟踪 [微信 4.0.0](https://pc.weixin.qq.com/) 自从 `4.0.0.35` (2024-11-20) 以来的公开版本历史。
 

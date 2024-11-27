@@ -2,7 +2,7 @@
 
 English | [简体中文](README.zh-CN.md)
 
-[![GitHub Workflow Status](https://img.shields.io/github/workflow/status/PRO-2684/wechat4-version-history/Update%20Versions?label=Update%20Versions&logo=github)](
+![GitHub Release](https://img.shields.io/github/v/release/PRO-2684/WeChat4-Version-History?logo=wechat&color=%2307c160)
 
 This repo automatically tracks public version history of [WeChat 4.0.0](https://pc.weixin.qq.com/), since `4.0.0.35` (2024-11-20).
 
