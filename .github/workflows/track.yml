@@ -1,0 +1,59 @@
+name: "track"
+
+on:
+  schedule:
+    - cron: '0 7 * * *'
+  # Support manual trigger
+  workflow_dispatch:
+
+jobs:
+  track:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+      - name: Setup Python
+        id: setup-python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.10'
+          cache: 'pip' # caching pip dependencies
+          cache-dependency-path: ./scripts/requirements.txt
+      - name: Install dependencies
+        run: |
+          echo 'Cache hit: ${{ steps.setup-python.outputs.cache-hit }}'
+          python -m pip install --upgrade pip
+          pip install -r ./scripts/requirements.txt
+      - name: Check Update
+        id: check-update
+        run: python ./scripts/check-update.py
+      - name: Download WeChat
+        if: steps.check-update.outputs.released != 'none'
+        run: |
+          mkdir -p downloads # Create directory `downloads` if not exists
+          wget -q -P downloads ${{ steps.check-update.outputs.url }}
+      - name: Install Dependencies
+        if: steps.check-update.outputs.released != 'none'
+        run: sudo apt-get install -y p7zip-full
+      - name: Do Update
+        id: do-update
+        if: steps.check-update.outputs.released != 'none'
+        run: python ./scripts/do-update.py --released ${{ steps.check-update.outputs.released }} --url ${{ steps.check-update.outputs.url }}
+      - name: Commit Changes
+        if: steps.check-update.outputs.released != 'none'
+        run: |
+          git config --local user.email "actions@github.com"
+          git config --local user.name "GitHub Actions"
+          git add versions.json
+          git commit -m "Detected WeChat update: ${{ steps.do-update.outputs.version }}"
+          git push origin main
+          echo "Successfully pushed changes (WeChat updated to ${{ steps.do-update.outputs.version }})"
+      - name: Create Release
+        if: steps.check-update.outputs.released != 'none'
+        uses: softprops/action-gh-release@v2
+        with:
+          body_path: ./release-notes.md
+          name: ${{ steps.do-update.outputs.version }}
+          tag_name: ${{ steps.do-update.outputs.version }}
+          files: |
+            downloads/*

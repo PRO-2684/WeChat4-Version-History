@@ -1,0 +1,33 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "type": "array",
+    "items": {
+        "type": "object",
+        "properties": {
+            "released": {
+                "type": "string",
+                "format": "date-time",
+                "title": "Released",
+                "description": "The date and time of the release"
+            },
+            "size": {
+                "type": "integer",
+                "title": "Size",
+                "description": "The size of the installer in bytes"
+            },
+            "md5": {
+                "type": "string",
+                "pattern": "^[a-f0-9]{32}$",
+                "title": "MD5",
+                "description": "The MD5 checksum of the installer"
+            },
+            "version": {
+                "type": "string",
+                "pattern": "^\\d+\\.\\d+\\.\\d+\\.\\d+$",
+                "title": "Version",
+                "description": "The version number of WeChat"
+            }
+        },
+        "required": ["updated", "size", "md5", "version"]
+    }
+}
