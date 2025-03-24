@@ -56,12 +56,19 @@ def getStat(url, file, directory="./downloads"):
 def getVersion():
     """Determines the version of the program."""
     fileName = args.url.split("/")[-1]
+    # Extract `install.7z`
+    output = check_output(f"7z e ./downloads/{fileName} install.7z", shell=True)
+    if not "Everything is Ok" in output.decode("utf-8"):
+        print("Failed to extract `install.7z`!")
+        return "<unknown>"
+    # Check version
     output = check_output(
-        f"7z l -ba -slt -i\!*/WeixinUpdate.exe ./downloads/{fileName}", shell=True
+        r"7z l -ba -slt -i\!*/WeixinUpdate.exe ./install.7z", shell=True
     )
     m = search(r"Path = (\d+\.\d+\.\d+\.\d+)/WeixinUpdate\.exe", output.decode("utf-8"))
     if m:
         return m.group(1)
+    print("Failed to find version!")
     return "<unknown>"
 
 
