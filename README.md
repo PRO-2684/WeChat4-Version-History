@@ -26,3 +26,13 @@ This file contains the version history of WeChat4 since `4.0.0.35`. It is struct
 
 - [QQNT-Version-History](https://github.com/PRO-2684/qqnt-version-history): Automatically tracks version history of [QQNT](https://im.qq.com/pcqq/index.shtml).
 - [wechat-windows-versions](https://github.com/tom-snow/wechat-windows-versions): Automatically tracks version history of [WeChat3](https://pc.weixin.qq.com/).
+
+## Star History
+
+<a href="https://www.star-history.com/#PRO-2684/WeChat4-Version-History&Date">
+ <picture>
+   <source media="(prefers-color-scheme: dark)" srcset="https://api.star-history.com/svg?repos=PRO-2684/WeChat4-Version-History&type=Date&theme=dark" />
+   <source media="(prefers-color-scheme: light)" srcset="https://api.star-history.com/svg?repos=PRO-2684/WeChat4-Version-History&type=Date" />
+   <img alt="Star History Chart" src="https://api.star-history.com/svg?repos=PRO-2684/WeChat4-Version-History&type=Date" />
+ </picture>
+</a>
