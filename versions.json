@@ -178,5 +178,11 @@
         "size": 200314640,
         "md5": "75cef1ef9e1bafc0ecba2d0070484d0a",
         "version": "4.0.5.17"
+    },
+    {
+        "released": "2025-05-27T09:48:00+00:00",
+        "size": 200552384,
+        "md5": "a5225db8ecc745b7c2fabe8e1d761b9f",
+        "version": "4.0.5.18"
     }
 ]
