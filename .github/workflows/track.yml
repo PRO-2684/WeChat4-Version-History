@@ -26,12 +26,20 @@ jobs:
           pip install -r ./scripts/requirements.txt
       - name: Check Update
         id: check-update
-        run: python ./scripts/check-update.py
+        uses: nick-fields/retry@v3
+        with:
+          timeout_minutes: 5
+          max_attempts: 5
+          command: python ./scripts/check-update.py
       - name: Download WeChat
         if: steps.check-update.outputs.released != 'none'
-        run: |
-          mkdir -p downloads # Create directory `downloads` if not exists
-          wget -q -P downloads ${{ steps.check-update.outputs.url }}
+        uses: nick-fields/retry@v3
+        with:
+          timeout_minutes: 10
+          max_attempts: 5
+          command: |
+            mkdir -p downloads # Create directory `downloads` if not exists
+            wget -q -P downloads ${{ steps.check-update.outputs.url }}
       - name: Install Dependencies
         if: steps.check-update.outputs.released != 'none'
         run: sudo apt-get install -y p7zip-full
