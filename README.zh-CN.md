@@ -2,6 +2,9 @@
 
 [English](README.md) | 简体中文 | ![GitHub Release](https://img.shields.io/github/v/release/PRO-2684/WeChat4-Version-History?logo=wechat&color=07c160)
 
+> [!NOTE]
+> 微信已经将下载网址从 `https://dldir1v6.qq.com/weixin/Universal/Windows/WeChatWin.exe` 更改为 `https://dldir1v6.qq.com/weixin/Universal/Windows/WeChatWin_{version}.exe`，因此此仓库已经错过了若干版本。具体来说，`4.1.1.19` 至 `4.1.6` (不包含) 之间的版本已经缺失。
+
 此仓库自动跟踪 [微信 4.0.0](https://pc.weixin.qq.com/) 自从 `4.0.0.35` (2024-11-20) 以来的公开版本历史。
 
 ## [`versions.json`](versions.json)

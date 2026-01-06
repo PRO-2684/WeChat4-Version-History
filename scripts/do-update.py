@@ -90,6 +90,7 @@ def generateReleaseNotes():
         f.write(f"- Released: {newData['released']}\n")
         f.write("\n")
         f.write("## Installer\n")
+        f.write(f"- Official URL: {args.url}\n")
         f.write(f"- Size: {naturalsize(newData['size'])}\n")
         f.write(f"- MD5: `{newData['md5']}`\n")
         f.write("\n")

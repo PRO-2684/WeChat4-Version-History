@@ -4,8 +4,8 @@ English | [简体中文](README.zh-CN.md) |
 [![GitHub Release](https://img.shields.io/github/v/release/PRO-2684/WeChat4-Version-History?logo=wechat&color=07c160)](https://github.com/PRO-2684/WeChat4-Version-History/releases/latest)
 [![GitHub Downloads (all assets, all releases)](https://img.shields.io/github/downloads/PRO-2684/WeChat4-Version-History/total?logo=github)](https://github.com/PRO-2684/WeChat4-Version-History/releases)
 
-> [!WARNING]
-> WeChat has changed the download URL from `https://dldir1v6.qq.com/weixin/Universal/Windows/WeChatWin.exe` to `https://dldir1v6.qq.com/weixin/Universal/Windows/WeChatWin_{version}.exe`, so this repo has missed some updates. A fix for the change will be committed soon.
+> [!NOTE]
+> WeChat has changed the download URL from `https://dldir1v6.qq.com/weixin/Universal/Windows/WeChatWin.exe` to `https://dldir1v6.qq.com/weixin/Universal/Windows/WeChatWin_{version}.exe`, so this repo has missed some updates. To be specific, versions between `4.1.1.19` and `4.1.6` (non-inclusive) are missing.
 
 This repo automatically tracks public version history of [WeChat 4.0.0](https://pc.weixin.qq.com/), since `4.0.0.35` (2024-11-20).
 
