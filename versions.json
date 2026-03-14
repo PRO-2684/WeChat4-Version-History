@@ -304,5 +304,11 @@
         "size": 232275768,
         "md5": "a6816fdec906fbc1bc1ec517cc6bd1db",
         "version": "4.1.7.59"
+    },
+    {
+        "released": "2026-03-14T04:51:19+00:00",
+        "size": 232747656,
+        "md5": "c6f3cf35c53f4e55ffcea2f6d364bcc3",
+        "version": "4.1.8.28"
     }
 ]
