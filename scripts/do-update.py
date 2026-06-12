@@ -20,6 +20,7 @@ newData = {
     "md5": "<unknown>",
     "version": "<unknown>",
 }
+statWarnings = []
 
 
 def setOutput(key, value):
@@ -34,7 +35,7 @@ def getStat(url, file, directory="./downloads"):
     """Get and validate the stat of the file at the specified URL."""
     r = x.head(url)
     # Using `X-COS-META-MD5` header
-    expectedHash = r.headers.get("X-COS-META-MD5") or "<unknown>"
+    expectedHash = r.headers.get("X-COS-META-MD5")
     # Calculate MD5 hash of the file
     path = f"{directory}/{file}"
     with open(path, "rb") as f:  # https://stackoverflow.com/a/59056837/16468609
@@ -42,15 +43,25 @@ def getStat(url, file, directory="./downloads"):
         while chunk := f.read(8192):
             hash.update(chunk)
     actualHash = hash.hexdigest()
-    expectedSize = int(r.headers.get("Content-Length")) or -1
+    expectedSize = r.headers.get("Content-Length")
+    expectedSize = int(expectedSize) if expectedSize else None
     actualSize = getsize(path)
-    if actualHash != expectedHash:
-        print(f"Hash mismatch! Expected: {expectedHash}, Got: {actualHash}")
-    if actualSize != expectedSize:
-        print(f"Size mismatch! Expected: {expectedSize}, Got: {actualSize}")
-    if actualHash == expectedHash and actualSize == expectedSize:
-        return actualHash, actualSize
-    return None, None
+
+    if expectedHash:
+        if actualHash != expectedHash:
+            raise RuntimeError(f"Hash mismatch! Expected: {expectedHash}, Got: {actualHash}")
+    else:
+        print(f"Warning: X-COS-META-MD5 header missing; using computed MD5 {actualHash}")
+        statWarnings.append("server MD5 header missing; recorded local hash")
+
+    if expectedSize is not None:
+        if actualSize != expectedSize:
+            raise RuntimeError(f"Size mismatch! Expected: {expectedSize}, Got: {actualSize}")
+    else:
+        print(f"Warning: Content-Length header missing; using local size {actualSize}")
+        statWarnings.append("server size header missing; recorded local size")
+
+    return actualHash, actualSize
 
 
 def getVersion():
@@ -92,7 +103,8 @@ def generateReleaseNotes():
         f.write("## Installer\n")
         f.write(f"- Official URL: {args.url}\n")
         f.write(f"- Size: {naturalsize(newData['size'])}\n")
-        f.write(f"- MD5: `{newData['md5']}`\n")
+        md5Warning = f" ({'; '.join(statWarnings)}.)" if statWarnings else ""
+        f.write(f"- MD5: `{newData['md5']}`{md5Warning}\n")
         f.write("\n")
 
 
